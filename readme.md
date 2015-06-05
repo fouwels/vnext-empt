@@ -1,6 +1,7 @@
 PROJ
 =====
 
-	Run: .\bootstrapSln	dev
+	Run: .\bootstrapr	dev
 						full
 						release
+	To populate
