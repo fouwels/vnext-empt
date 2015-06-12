@@ -13,13 +13,14 @@ namespace pls.Controllers
     public class ValuesController : Controller
     {
 		private ILogger _logr;
-		public ValuesController(ILogger lg)
+		public ValuesController(ILogger<ValuesController> lg)
 		{
 			_logr = lg;
-			_logr.LogInformation("hit");
+			_logr.LogInformation("yas");
 		}
+
         [HttpGet]
-        public IEnumerable<string> test()
+        public IEnumerable<string> Test()
         {
             return new string[] { "value1", "value2" };
         }

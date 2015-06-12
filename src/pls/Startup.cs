@@ -8,6 +8,7 @@ using Microsoft.AspNet.Http;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.ConfigurationModel.UserSecrets;
 using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.Logging;
 
 namespace pls
 {
@@ -17,10 +18,11 @@ namespace pls
 		public Startup(IHostingEnvironment env)
 		{
 			var conf = new Configuration();
-
-			conf.AddJsonFile("config.json");
-			if (env.IsEnvironment("Development")) { conf.AddUserSecrets(); }
-
+			//conf.AddJsonFile("config.json");
+			//if (env.IsEnvironment("Development"))
+			//{
+			//	conf.AddUserSecrets();
+			//}
 			Configuration = conf;
 		}
 		public void ConfigureServices(IServiceCollection services)
@@ -29,17 +31,18 @@ namespace pls
 			services.AddLogging();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-			app.UseMvc(); //attribute routing
+			loggerFactory.AddConsole(minLevel: LogLevel.Information);
 			app.UseStaticFiles();
+			app.UseMvc(); //attribute routing
 
 			//app.UseMvc(routes =>
 			//{
 			//	routes.MapRoute(
 			//	name: "default",
-			//	template: "{controller}/{action}/{id?}"
-			//	//, defaults: new { controller = "Home", action = "Index" }
+			//	template: "{controller}/{action}/{id?}", 
+			//	defaults: new { controller = "", action = "" }
 			//	);
 			//});
 		}
