@@ -26,6 +26,7 @@ namespace pls
 		public void ConfigureServices(IServiceCollection services)
         {
 			services.AddMvc();
+			services.AddLogging();
         }
 
         public void Configure(IApplicationBuilder app)
